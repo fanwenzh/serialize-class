@@ -1,6 +1,6 @@
 {
   "name": "serialize-class",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Serialize JavaScript to a superset of JSON that includes regular expressions, functions and user-defined class.",
   "main": "index.js",
   "scripts": {

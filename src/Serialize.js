@@ -6,7 +6,7 @@ class Serialize {
     static _SerializeAlreadyTraverse = false
     static _classesMap = new Map()
     static _schemasMap = new Map()
-    // TODO: expand
+    // TODO
     static _exclude = undefined
 
     // store the class before serialize or deserialize

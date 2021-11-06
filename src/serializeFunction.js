@@ -70,7 +70,7 @@ function transformStringType(val, typeStr, schemaMap) {
 
     if (typeStr === "function") throw Error("Doesn't support Function yet")
 
-    // 有可能是 继承关系，因此不使用 typeStr.toLowerCase()
+    // Don't use typeStr.toLowerCase() beacause it may be an inheritance relationship
     let clsType = val.constructor.name.toLowerCase()
 
     const schema = schemaMap.get(clsType)
@@ -78,7 +78,7 @@ function transformStringType(val, typeStr, schemaMap) {
 
     const res = serializeObj(val, schema, schemaMap)
 
-    // 自定义类: TODO: 增加 schema保存的type 和 val.constructor.name 的类型判断
+    // Custom class: TODO: add type judgement between schema's 'type and val.constructor.name
     if (clsType !== "object" && clsType !== typeStr.toLowerCase() && !val[SERIALIZE_TYPE]) {
         res[SERIALIZE_TYPE] = clsType
     }
@@ -200,7 +200,7 @@ function detransformStringType(val, typeStr, schemaMap, classMap) {
     }
 
     if (typeStr === "bigint") {
-        return new BigInt(val)
+        return BigInt(val)
     }
 
     if (typeStr === "date") {
@@ -240,9 +240,9 @@ function detransformObjectType(jsonObj, schema, schemaMap, classMap) {
     }
 }
 
-function deserialize(str, cls, schemaMap, classMap = new Map()) {
+function deserialize(str, cls = Object, schemaMap, classMap = new Map()) {
     let jsonObj = JSON.parse(str)
-    if (cls === undefined) {
+    if (!schemaMap) {
         return jsonObj
     }
 

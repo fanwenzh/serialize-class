@@ -10,24 +10,65 @@ $ npm install serialize-class
 
 Usage by extend Serialize class
 ```javascript
-// 1. 继承Serialize 类
-class A extends Serialize {
-  // 1.1 添加序列化和反序列化的 _schema 和 属性类型集合 _classes
-  // 其中_classess内的类方法是递归读取超类的
-  static _schema = Aschema
-  static _classes = [property_a_Class, property_b_Class, property_c_Class]
-  constructor() {
-      // 1.2 增加super调用
-      super()
-  }
+// an example in test/class.test.js
+const Bschema = {
+    type: "b",
+    properties: {
+        strs: {
+            type: "object",
+            properties: {
+                arr: {
+                    type: "array",
+                    subType: "regexp"
+                }
+            }
+        }
+    }
 }
 
-// 2. 使用Serialize方法
-const obj = new A()
-// 2.1 序列化stringify
-const str = obj.stringify()
-// 2.2 反序列化toInstance(str)
-const newObj = A.toInscance(str)
+class B extends Serialize {
+    static _schema = Bschema
+    constructor(options) {
+        super()
+        Object.assign(this, options)
+    }
+}
+
+const Aschema = {
+    type: "a",
+    properties: {
+        a : {
+            type: "array",
+            subType: "number"
+        },
+        b : "B"
+    }
+}
+
+class A extends Serialize {
+    static _schema = Aschema 
+    static _classes = [B]
+    constructor(options) {
+        super()
+        Object.assign(this, options)
+    }
+}
+
+const objB = {
+    strs: {
+        arr: [/test1/g, /test2/i]
+    }
+}
+const objA = {
+    a : [1,2,3],
+    b : new B(objB)
+}
+
+const ins = new A(objA)
+// {"a":[1,2,3],"b":{"strs":{"arr":[{"source":"test1","flags":"g"},{"source":"test2","flags":"i"}]}}}
+const str = ins.stringify()
+const newIns = A.toInstance(str)
+newIns.b instanceof B // true
 ```
 
 ## TODO

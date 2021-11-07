@@ -3,79 +3,79 @@ chai.should()
 
 const { deserialize, serializeWithSchemas } = require("../src/serializeFunction.js")
 
-describe("serialize and deserialize", () => {
-    const obj = {
-        a: [/reg/],
-        b: [new Set([1]), new Set([1, 2, 3])],
-        c: "sasedasd",
-        d: new Map().set("asd", { dp: 1 }),
-        e: {
-            ep1: "e property 1",
-            ep2: "e property 2",
-        },
-    }
+const obj = {
+    a: [/reg/],
+    b: [new Set([1]), new Set([1, 2, 3])],
+    c: "sasedasd",
+    d: new Map().set("asd", { dp: 1 }),
+    e: {
+        ep1: "e property 1",
+        ep2: "e property 2",
+    },
+}
 
-    const objSchema = {
-        type: "object",
-        properties: {
-            a: {
-                type: "array",
-                subType: "regexp",
+const objSchema = {
+    type: "object",
+    properties: {
+        a: {
+            type: "array",
+            subType: "regexp",
+        },
+        b: {
+            type: "array",
+            subType: {
+                type: "set",
+                subType: "number",
             },
-            b: {
-                type: "array",
-                subType: {
-                    type: "set",
-                    subType: "number",
-                },
-            },
-            c: "string",
-            d: {
-                type: "map",
-                keyType: "string",
-                valueType: {
-                    type: "object",
-                    properties: {
-                        dp: "number",
-                    },
-                },
-            },
-            e: {
+        },
+        c: "string",
+        d: {
+            type: "map",
+            keyType: "string",
+            valueType: {
                 type: "object",
                 properties: {
-                    ep1: "string",
-                    ep2: "string",
+                    dp: "number",
                 },
             },
         },
-    }
-
-    const ASchema = Object.assign({}, objSchema, { type: "A" })
-    class A {
-        constructor() {
-            Object.assign(this, obj)
-        }
-    }
-
-    const BSchema = {
-        type: "B",
-        properties: {
-            p1: ASchema,
-            p2: "string",
+        e: {
+            type: "object",
+            properties: {
+                ep1: "string",
+                ep2: "string",
+            },
         },
-    }
-    class B {
-        constructor() {
-            this.p1 = new A()
-            this.p2 = "test"
-        }
-    }
+    },
+}
 
-    const schemas = new Map([
-        ["a", ASchema],
-        ["b", BSchema],
-    ])
+const ASchema = Object.assign({}, objSchema, { type: "A" })
+class A {
+    constructor() {
+        Object.assign(this, obj)
+    }
+}
 
+const BSchema = {
+    type: "B",
+    properties: {
+        p1: ASchema,
+        p2: "string",
+    },
+}
+class B {
+    constructor() {
+        this.p1 = new A()
+        this.p2 = "test"
+    }
+}
+
+const schemas = new Map([
+    ["a", ASchema],
+    ["b", BSchema],
+])
+
+describe("serialize and deserialize", () => {
     describe("basicly serialize and deserialize", () => {
         it("shallow object with properties of boolean, string, number", () => {
             const obj = { a: true, b: "test", c: 123 }

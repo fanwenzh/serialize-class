@@ -74,8 +74,8 @@ class Serialize {
     }
 
     /** had already set the properties of _classes and _schemas */
-    setTraverseFlag(flag = true) {
-        this.constructor._SerializeAlreadyTraverse = flag
+    static setTraverseFlag(flag = true) {
+        this._SerializeAlreadyTraverse = flag
     }
 
     stringify(flushClasses = false) {

@@ -24,10 +24,6 @@ class Serialize {
      * @param {boolean} flushClasses flush properties of class and schema map
      * */
     static toInstance(str, cls = this, flushClasses = false) {
-        if (typeof cls !== "function") {
-            throw Error(`${cls} isn't class function`)
-        }
-
         if (!cls._schema) {
             return Object.assign(new cls(), JSON.parse(str))
         }

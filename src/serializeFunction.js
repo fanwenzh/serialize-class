@@ -165,7 +165,6 @@ function deserializeMap(arr, schema, schemaMap, classMap) {
     }
     const map = new Map()
     arr.forEach(([mKey, mVal]) => {
-        if (map.has(mKey)) console.warn(`Map object has the same key in deserializing: ${mKey}`)
         map.set(mKey, detransformElement(mVal, valueType, schemaMap, classMap))
     })
     return map
@@ -174,10 +173,7 @@ function deserializeMap(arr, schema, schemaMap, classMap) {
 function deserializeSet(arr, schema, schemaMap, classMap) {
     const { subType } = schema
     const set = new Set()
-    arr.forEach((e) => {
-        if (set.has(e)) console.warn(`Set object has the same value in deserializing: ${e}`)
-        set.add(detransformElement(e, subType, schemaMap, classMap))
-    })
+    arr.forEach((e) => set.add(detransformElement(e, subType, schemaMap, classMap)))
     return set
 }
 

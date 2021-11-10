@@ -1,4 +1,4 @@
-# serialize-class 
+# serialize-javascript-class
 Serialize JavaScript to a _superset_ of JSON that includes regular expressions, dates, array and custom class.
 
 ![](https://img.shields.io/badge/license-MIT-green)

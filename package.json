@@ -1,5 +1,5 @@
 {
-  "name": "serialize-class",
+  "name": "serialize-js-class",
   "version": "0.1.0",
   "description": "Serialize JavaScript to a superset of JSON that includes regular expressions, functions and user-defined class.",
   "main": "index.js",
@@ -9,14 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fanwenzh/serialize-class.git"
+    "url": "git+https://github.com/fanwenzh/serialize-js-class.git"
   },
   "author": "fanwenzh",
+  "email": "sysu_fwz@163.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fanwenzh/serialize-class/issues"
+    "url": "https://github.com/fanwenzh/serialize-js-class/issues"
   },
-  "homepage": "https://github.com/fanwenzh/serialize-class#readme",
+  "homepage": "https://github.com/fanwenzh/serialize-js-class#readme",
   "devDependencies": {
     "chai": "^4.1.0",
     "mocha": "^9.0.0",

@@ -1,6 +1,12 @@
 # serialize-class 
 Serialize JavaScript to a _superset_ of JSON that includes regular expressions, dates, array and custom class.
 
+![](https://img.shields.io/badge/license-MIT-green)
+![](https://img.shields.io/badge/npm-v6.0.0-blue)
+![](https://img.shields.io/badge/coverage-95%25-green)
+![Test](https://github.com/fanwenzh/serialize-class/workflows/Test/badge.svg)
+<!-- ![](https://img.shields.io/github/stars/fanwenzh/serialize-class.svg) -->
+
 ## Installation
 
 Install using npm:

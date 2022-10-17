@@ -20,7 +20,7 @@
   "homepage": "https://github.com/fanwenzh/serialize-js-class#readme",
   "devDependencies": {
     "chai": "^4.1.0",
-    "mocha": "^9.0.0",
+    "mocha": "^10.1.0",
     "nyc": "^15.0.0"
   }
 }
